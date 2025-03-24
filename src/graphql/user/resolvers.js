@@ -11,9 +11,15 @@ const user = async (_, { id }, { getUsers }) => {
   return user;
 };
 
+const post = async ({ id }, __, { postDataLoader }) => {
+  console.log(' Resolvers User: ', id);
+  return postDataLoader.load(id);
+};
+
 export const userResolvers = {
   Query: {
     users,
     user,
   },
+  User: { post },
 };

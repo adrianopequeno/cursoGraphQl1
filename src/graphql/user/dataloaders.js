@@ -2,6 +2,7 @@ import DataLoader from 'dataloader';
 
 export const makeUserDataLoader = (getUsers) => {
   return new DataLoader(async (userIds) => {
+    // 1 -> 1. relação de 1 para 1
     const urlQuery = userIds.join('&id=');
 
     const response = await getUsers(`id=${urlQuery}`);

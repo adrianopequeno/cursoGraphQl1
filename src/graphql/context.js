@@ -1,35 +1,35 @@
 import fetch from 'node-fetch';
+import { normalizedPath } from '../utils.js';
+import { getUsers } from './user/utils';
+import { makeUserDataLoader } from './user/dataloaders.js';
 
-const API_URL = 'http://localhost:3000/';
+const API_URL = process.env.API_URL;
 
 export const context = () => {
   return {
-    getUsers: (path = '/') => {
-      return fetch(`${API_URL}users${normalizedPath(path)}`);
-    },
+    userDataLoader: makeUserDataLoader(getUsers(fetch)),
+    getUsers: getUsers(fetch),
     getPosts: (path = '/') => {
-      // console.log(path);
-      // console.log(normalizedPath(path));
       return fetch(`${API_URL}posts${normalizedPath(path)}`);
     },
   };
 };
 
-const normalizedPath = (path) => {
-  if (typeof path === 'object' && path !== null) {
-    // Se for um objeto, transforma em query string
-    const queryString = new URLSearchParams(path).toString();
-    return queryString ? `?${queryString}` : '';
-  }
+// const normalizedPath = (path) => {
+//   if (typeof path === 'object' && path !== null) {
+//     // Se for um objeto, transforma em query string
+//     const queryString = new URLSearchParams(path).toString();
+//     return queryString ? `?${queryString}` : '';
+//   }
 
-  // Converte para string caso venha como número, null ou undefined
-  const strPath = String(path);
+//   // Converte para string caso venha como número, null ou undefined
+//   const strPath = String(path);
 
-  if (strPath === '/') {
-    return strPath;
-  } else if (/^\d+$/.test(strPath)) {
-    return `/${strPath.replace(/^\/+/, '')}`;
-  } else {
-    return `?${strPath}`;
-  }
-};
+//   if (strPath === '/') {
+//     return strPath;
+//   } else if (/^\d+$/.test(strPath)) {
+//     return `/${strPath.replace(/^\/+/, '')}`;
+//   } else {
+//     return `?${strPath}`;
+//   }
+// };

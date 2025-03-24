@@ -4,13 +4,14 @@ import { makeUserDataLoader } from './user/dataloaders.js';
 import { getPosts } from './post/utils.js';
 import { makePostDataLoader } from './post/postDataLoaders.js';
 
-const API_URL = process.env.API_URL;
+const _getUsers = getUsers(fetch);
+const _getPosts = getPosts(fetch);
 
 export const context = () => {
   return {
-    userDataLoader: makeUserDataLoader(getUsers(fetch)),
-    getUsers: getUsers(fetch),
-    postDataLoader: makePostDataLoader(getPosts(fetch)),
-    getPosts: getPosts(fetch),
+    userDataLoader: makeUserDataLoader(_getUsers),
+    getUsers: _getUsers,
+    postDataLoader: makePostDataLoader(_getPosts),
+    getPosts: _getPosts,
   };
 };

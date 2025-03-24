@@ -7,25 +7,16 @@ export class PostsApi extends RESTDataSource {
   }
 
   async getPosts(urlParams = {}) {
-    const response = await this.get('', urlParams);
-    // return Array.isArray(response)
-    //   ? response.map((post) => this.postReducer(post))
-    //   : [];
+    const response = await this.get('', urlParams, {
+      cacheOptions: { ttl: 60 }, // 60seg
+    });
     return response;
   }
 
   async getPost(id) {
-    const response = await this.get(`/${id}`);
-    // return this.postReducer(response);
+    const response = await this.get(`/${id}`, undefined, {
+      cacheOptions: { ttl: 60 }, // 60seg
+    });
     return response;
   }
-
-  // postReducer(post) {
-  //   return {
-  //     id: post.id,
-  //     title: post.title,
-  //     body: post.body,
-  //     userId: post.userId,
-  //   };
-  // }
 }

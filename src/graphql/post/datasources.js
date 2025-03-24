@@ -10,6 +10,7 @@ export class PostsApi extends RESTDataSource {
   }
 
   async getPosts(urlParams = {}) {
+    // console.log('getPosts', urlParams);
     const response = await this.get('', urlParams, {
       cacheOptions: { ttl: 60 }, // 60seg
     });

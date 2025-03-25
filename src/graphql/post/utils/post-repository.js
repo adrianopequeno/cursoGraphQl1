@@ -11,6 +11,35 @@ export const createPostFn = async (postData, datasource) => {
   return await datasource.post('', { ...postInfo });
 };
 
+export const updatePostFn = async (postId, postData, datasource) => {
+  if (!postId) {
+    throw new ValidationError('ID is required');
+  }
+
+  const { title, body, userId } = postData;
+
+  if (typeof title !== 'undefined') {
+    if (!title) {
+      throw new ValidationError('Title is required');
+    }
+  }
+
+  if (typeof body !== 'undefined') {
+    if (!body) {
+      throw new ValidationError('Body is required');
+    }
+  }
+
+  if (typeof userId !== 'undefined') {
+    if (!userId) {
+      throw new ValidationError('User Id is required');
+    }
+    await userExists(userId, datasource);
+  }
+
+  return await datasource.patch(postId, { ...postData });
+};
+
 const userExists = async (userId, datasource) => {
   console.log('userExists', userId);
   try {

@@ -11,17 +11,7 @@ const post = async (_, { id }, { dataSources }) => {
 
 // Mutations Resolvers
 const createPost = async (_, { data }, { dataSources }) => {
-  // const post = await dataSources.postsApi.createPost(data);
-  // return post;
-  console.log(data);
-  return {
-    id: '1',
-    title: 'title',
-    body: 'body',
-    indexRef: 1,
-    createdAt: new Date().toISOString(),
-    userId: '502',
-  };
+  return await dataSources.postsApi.createPost(data);
 };
 
 // Fields Resolvers

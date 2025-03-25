@@ -16,7 +16,7 @@ export const postTypeDefs = gql`
   }
 
   extend type Mutation {
-    createPost(id: ID!): Post!
+    createPost(data: CreatePostInput!): Post!
     # updatePost(id: ID!, data: UpdatePostInput!): Post!
     # deletePost(id: ID!): Boolean!
     # deleteAllPosts: Boolean!
@@ -29,5 +29,11 @@ export const postTypeDefs = gql`
     indexRef: Int!
     createdAt: String!
     user: User!
+  }
+
+  input CreatePostInput {
+    title: String!
+    body: String!
+    userId: String!
   }
 `;

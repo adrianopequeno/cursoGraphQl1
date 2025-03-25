@@ -18,6 +18,10 @@ const updatePost = async (_, { postId, data }, { dataSources }) => {
   return dataSources.postsApi.updatePost(postId, data);
 };
 
+const deletePost = async (_, { postId }, { dataSources }) => {
+  return dataSources.postsApi.deletePost(postId);
+};
+
 // Fields Resolvers
 // async (parent)
 const user = async ({ userId }, __, { dataSources }) => {
@@ -32,7 +36,7 @@ export const postResolvers = {
   Mutation: {
     createPost,
     updatePost,
-    // deletePost,
+    deletePost,
     // deleteAllPosts,
   },
   Post: { user },

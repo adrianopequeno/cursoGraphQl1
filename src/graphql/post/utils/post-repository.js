@@ -40,6 +40,15 @@ export const updatePostFn = async (postId, postData, datasource) => {
   return await datasource.patch(postId, { ...postData });
 };
 
+export const deletePostFn = async (postId, datasource) => {
+  if (!postId) {
+    throw new ValidationError('ID is required');
+  }
+
+  const deleted = await datasource.delete(postId);
+  return !!deleted;
+};
+
 const userExists = async (userId, datasource) => {
   console.log('userExists', userId);
   try {

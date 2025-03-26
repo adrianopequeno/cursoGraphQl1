@@ -7,8 +7,38 @@ export const createUserFn = async (userData, datasource) => {
   if (!firstName || !lastName || !userName) {
     throw new ValidationError('All fields are required');
   }
-  console.log('userInfo', userInfo);
+
   return await datasource.post('', { ...userInfo });
+};
+
+export const updateUserFn = async (userId, userData, datasource) => {
+  // verificar se o userId foi passado
+  if (!userId) {
+    throw new ValidationError('UserID is required');
+  }
+
+  const { firstName, lastName, userName } = userData;
+
+  if (
+    (typeof firstName !== 'undefined' && !firstName) ||
+    (typeof lastName !== 'undefined' && !lastName) ||
+    (typeof userName !== 'undefined' && !userName)
+  ) {
+    throw new ValidationError('Missing data. Review your information');
+  }
+
+  await userExists(userId, datasource);
+
+  return await datasource.patch(userId, { ...userData });
+};
+
+const userExists = async (userId, datasource) => {
+  console.log('userExists', userId);
+  try {
+    await datasource.context.dataSources.usersApi.get(`${userId}`);
+  } catch (e) {
+    throw new ValidationError(`User ${userId} does not exists`);
+  }
 };
 
 const createUserInfo = async (userData, datasource) => {

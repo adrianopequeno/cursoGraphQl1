@@ -32,6 +32,12 @@ export const updateUserFn = async (userId, userData, datasource) => {
   return await datasource.patch(userId, { ...userData });
 };
 
+export const deleteUserFn = async (userId, datasource) => {
+  await userExists(userId, datasource);
+  const deleted = await datasource.delete(userId);
+  return !!deleted;
+};
+
 const userExists = async (userId, datasource) => {
   console.log('userExists', userId);
   try {

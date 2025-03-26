@@ -161,12 +161,12 @@
       "createdAt": "2016-12-08T00:49:39.870Z"
     },
     {
-      "firstName": "ATUALIZADO Fulano 3",
-      "lastName": "ATUALIZADO Silva 2",
-      "userName": "ATUALIZADO fulano.silva 1",
+      "firstName": "Fulano",
+      "lastName": "Silva",
+      "userName": "fulano.silva",
       "indexRef": 21,
-      "createdAt": "2025-03-26T13:19:24.720Z",
-      "id": "5iJbwbj"
+      "createdAt": "2025-03-26T14:13:34.081Z",
+      "id": "m5H2vmR"
     }
   ],
   "posts": [
@@ -361,14 +361,6 @@
       "userId": "502",
       "indexRef": 19,
       "createdAt": "2017-04-26T19:39:05.420Z"
-    },
-    {
-      "title": "Post de Fulano",
-      "body": "Corpo do post",
-      "userId": "5iJbwbj",
-      "indexRef": 25,
-      "createdAt": "2025-03-26T13:26:36.100Z",
-      "id": "y9JpPD6"
     }
   ],
   "comments": [

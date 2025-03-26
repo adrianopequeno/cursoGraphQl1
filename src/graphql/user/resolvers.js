@@ -18,6 +18,10 @@ const updateUser = async (_, { userId, data }, { dataSources }) => {
   return dataSources.usersApi.updateUser(userId, data);
 };
 
+const deleteUser = async (_, { userId }, { dataSources }) => {
+  return dataSources.usersApi.deleteUser(userId);
+};
+
 // Filds Resolvers
 const posts = async ({ id }, __, { dataSources }) => {
   // console.log(' Resolvers User: ', id);
@@ -32,6 +36,7 @@ export const userResolvers = {
   Mutation: {
     createUser,
     updateUser,
+    deleteUser,
   },
   User: { posts },
 };
